@@ -14,7 +14,7 @@ jobs:
       - name: Build
         run: |
           npm install
-          npx ng build --prod
+          npx ng build --prod --base-href=/cgc-app
 
       - name: Publish
         uses: cpina/github-action-push-to-another-repository@master
