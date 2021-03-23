@@ -2,7 +2,7 @@ name: cd
 
 on:
   push:
-    branches: [main, various]
+    branches: main
 
 jobs:
   build-and-publish:
