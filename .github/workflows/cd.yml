@@ -14,7 +14,7 @@ jobs:
       - name: Build
         run: |
           npm install
-          npx ng build --prod --base-href=/cgc-app --deploy-url=/cgc-app
+          npx ng build --prod --base-href=/cgc-app/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
 
       - name: Publish
         uses: cpina/github-action-push-to-another-repository@master
