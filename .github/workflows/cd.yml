@@ -1,0 +1,28 @@
+name: cd
+
+on:
+  push:
+    branches: main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    container: node
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          npm install
+          npx ng build --prod --base-href=/cgc-app/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
+
+      - name: Publish
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
+        with:
+          source-directory: 'dist'
+          target-branch: main
+          destination-github-username: 'askolesov'
+          destination-repository-name: 'askolesov.github.io'
+          user-email: kolesov.alex.s@gmail.com
