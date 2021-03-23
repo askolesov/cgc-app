@@ -11,6 +11,7 @@ jobs:
 
       - name: Build
         run: |
+          npm install -G ng
           npm install
           ng build --prod
 
@@ -22,5 +23,6 @@ jobs:
 
       - name: Lint
         run: |
+          npm install -G ng
           npm install
           ng lint --type-check
