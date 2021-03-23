@@ -1,0 +1,27 @@
+name: cd
+
+on:
+  push:
+    branches: [main, various]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    container: node
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          npm install
+          ng build --prod
+
+      - name: Publish
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
+        with:
+          source-directory: 'dist'
+          destination-github-username: 'askolesov'
+          destination-repository-name: 'askolesov.github.io'
+          user-email: kolesov.alex.s@gmail.com

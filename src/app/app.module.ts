@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './modules/home/home.module';
+import { PlaygroundModule } from './modules/playground/playground.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { HomeModule } from './modules/home/home.module';
     CoreModule,
     SharedModule,
     HomeModule,
+    PlaygroundModule,
     AppRoutingModule
   ],
   providers: [
