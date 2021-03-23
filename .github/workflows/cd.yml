@@ -22,6 +22,7 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
         with:
           source-directory: 'dist'
+          target-branch: main
           destination-github-username: 'askolesov'
           destination-repository-name: 'askolesov.github.io'
           user-email: kolesov.alex.s@gmail.com
