@@ -7,6 +7,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './modules/home/home.module';
 import { PlaygroundModule } from './modules/playground/playground.module';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PlaygroundModule } from './modules/playground/playground.module';
   ],
   providers: [
     { provide: 'BASE_API_URL', useValue: environment.apiUrl },
+    { provide: APP_BASE_HREF, useValue: environment.baseUrl }
   ],
   bootstrap: [
     AppComponent
