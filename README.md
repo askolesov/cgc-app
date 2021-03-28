@@ -6,6 +6,12 @@ CD is targeting my GitHub pages. You can find deployed application here:
 
 https://askolesov.github.io/cgc-app
 
+## Back-end
+
+Repository with back-end sources:
+
+https://github.com/askolesov/cgc-cloud
+
 ## Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
