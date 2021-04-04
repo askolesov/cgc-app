@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'cgc-app'`, () => {
+  it(`should have as title 'codelab-ng'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('cgc-app');
+    expect(app.title).toEqual('codelab-ng');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('cgc-app app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('codelab-ng app is running!');
   });
 });

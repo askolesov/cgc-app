@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cgc-app": {
+    "codelab-ng": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/cgc-app",
+            "outputPath": "dist/codelab-ng",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cgc-app:build"
+            "browserTarget": "codelab-ng:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cgc-app:build:production"
+              "browserTarget": "codelab-ng:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cgc-app:build"
+            "browserTarget": "codelab-ng:build"
           }
         },
         "test": {
@@ -114,15 +114,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "cgc-app:serve"
+            "devServerTarget": "codelab-ng:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "cgc-app:serve:production"
+              "devServerTarget": "codelab-ng:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "cgc-app"
+  "defaultProject": "codelab-ng"
 }

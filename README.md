@@ -1,16 +1,16 @@
-# CgcApp
+# CodeLab Ng
 
 ## Test environment
 
-CD is targeting my GitHub pages. You can find deployed application here:
+CD is targeting org's GitHub pages. You can find deployed application here:
 
-https://askolesov.github.io/cgc-app
+https://codelab-dev.github.io/codelab-ng
 
 ## Back-end
 
 Repository with back-end sources:
 
-https://github.com/askolesov/cgc-cloud
+https://github.com/codelab-dev/codelab-cloud
 
 ## Angular
 

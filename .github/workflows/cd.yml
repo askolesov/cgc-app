@@ -14,7 +14,7 @@ jobs:
       - name: Build
         run: |
           npm install
-          npx ng build --prod --base-href=/cgc-app/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
+          npx ng build --prod --base-href=/codelab-ng/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
 
       - name: Publish
         uses: cpina/github-action-push-to-another-repository@master
@@ -23,6 +23,6 @@ jobs:
         with:
           source-directory: 'dist'
           target-branch: main
-          destination-github-username: 'askolesov'
-          destination-repository-name: 'askolesov.github.io'
+          destination-github-username: ${{ secrets.GH_USER }}
+          destination-repository-name: 'codelab-dev.github.io'
           user-email: kolesov.alex.s@gmail.com
