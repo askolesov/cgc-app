@@ -2,7 +2,7 @@
 
 ## Test environment
 
-CD is targeting my GitHub pages. You can find deployed application here:
+CD is targeting org's GitHub pages. You can find deployed application here:
 
 https://codelab-dev.github.io/codelab-ng
 
