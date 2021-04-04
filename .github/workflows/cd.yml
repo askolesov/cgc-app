@@ -23,6 +23,6 @@ jobs:
         with:
           source-directory: 'dist'
           target-branch: main
-          destination-github-username: ${{ secrets.GH_USER }}
+          destination-github-username: 'codelab-dev'
           destination-repository-name: 'codelab-dev.github.io'
           user-email: kolesov.alex.s@gmail.com
