@@ -24,3 +24,14 @@ jobs:
         run: |
           npm install
           npx ng lint --type-check
+
+  deps:
+    runs-on: ubuntu-latest
+    container: node
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check that dependencies are up to date
+        run: |
+          npm install
+          npm run deps-check
