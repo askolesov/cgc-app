@@ -19,10 +19,8 @@ jobs:
           npm install
           npx ng build --prod --base-href=/codelab-ng/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
           
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: dist
-          CLEAN: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist
