@@ -9,20 +9,20 @@ jobs:
     runs-on: ubuntu-latest
     container: node
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+        with:
+          persist-credentials: false
 
-      - name: Build
+      - name: Build 🔧
         run: |
           npm install
           npx ng build --prod --base-href=/codelab-ng/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
-
-      - name: Publish
-        uses: cpina/github-action-push-to-another-repository@master
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.GH_TOKEN }}
+          
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
-          source-directory: 'dist'
-          target-branch: main
-          destination-github-username: 'codelab-dev'
-          destination-repository-name: 'codelab-dev.github.io'
-          user-email: kolesov.alex.s@gmail.com
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist
+          CLEAN: true

@@ -16,5 +16,8 @@
       "es2018",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "disableTypeScriptVersionCheck": true // Disables typescript version check in Angular. Not recommended but allows to keep all versions up to date.
   }
 }
