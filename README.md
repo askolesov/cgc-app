@@ -4,7 +4,7 @@
 
 CD is targeting org's GitHub pages. You can find deployed application here:
 
-https://codelab-dev.github.io/codelab-ng
+https://codelab-dev.github.io/codelab-ng/codelab-ng
 
 ## Back-end app
 
