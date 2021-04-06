@@ -10,7 +10,7 @@ jobs:
     container: node
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.1
 
       - name: Build 🔧
         run: |
@@ -18,7 +18,7 @@ jobs:
           npx ng build --prod --base-href=/codelab-ng/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
           
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4
+        uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
           BRANCH: gh-pages
           FOLDER: dist
