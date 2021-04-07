@@ -4,13 +4,20 @@
 
 CD is targeting org's GitHub pages. You can find deployed application here:
 
-https://codelab-dev.github.io/codelab-ng/codelab-ng
+- https://codelab-dev.github.io/codelab-ng/codelab-ng
 
 ## Back-end app
 
 Repository with back-end sources:
 
-https://github.com/codelab-dev/codelab-cloud
+- https://github.com/codelab-dev/codelab-cloud
+
+## Project structure
+
+Read more about it here:
+
+- https://medium.com/@motcowley/angular-folder-structure-d1809be95542
+- https://itnext.io/choosing-a-highly-scalable-folder-structure-in-angular-d987de65ec7
 
 ## Angular
 
