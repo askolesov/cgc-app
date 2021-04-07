@@ -1,0 +1,22 @@
+<h1 class="h2">Strategies</h1>
+
+<ng-container *ngIf="items$ | async as items; else loadingBlock">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let strategy of items">
+                <td>{{strategy.id}}</td>
+                <td>{{strategy.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>
+
+<ng-template #loadingBlock>
+    <div>Loading strategies...</div>
+</ng-template>
