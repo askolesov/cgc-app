@@ -20,24 +20,9 @@ jobs:
           npx ng build --prod
 
       - name: Deploy 🚀
-        env:
-          DIR_TO_PUBLISH: dist
-          ORG_NAME: codelab-dev
-          REPO_NAME: codelab-dev.github.io
-          USER_NAME: Alexandr Kolesov
-          USER_EMAIL: kolesov.alex.s@gmail.com
-        run: |
-          # Clone
-          git clone https://${{ secrets.GH_USER }}:${{ secrets.GH_PAT }}@github.com/${{ env.ORG_NAME }}/${{ env.REPO_NAME }}
-          
-          # Update content
-          rm -rf ${{ env.REPO_NAME }}/*
-          cp ${{ env.DIR_TO_PUBLISH }}/* ${{ env.REPO_NAME }}
-
-          # Commit and push
-          cd ${{ env.REPO_NAME }}
-          git config user.name ${{ env.USER_NAME }}
-          git config user.email ${{ env.USER_EMAIL }}
-          git add .
-          git commit -m "New version"
-          git push
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.GH_PAT }}
+          external_repository: codelab-dev/codelab-dev.github.io
+          publish_dir: dist/codelab-ng
+          publish_branch: main
