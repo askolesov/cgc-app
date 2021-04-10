@@ -2,9 +2,7 @@ name: cd
 
 on:
   push:
-    branches:
-    - main
-    - ghp-new
+    branches: main
 
 jobs:
   build-and-publish:
@@ -16,33 +14,25 @@ jobs:
         with:
           persist-credentials: false
 
-#       - name: Build 🔧
-#         run: |
-#           npm install
-#           npx ng build --prod --base-href=/codelab-ng/codelab-ng/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
-          
-#       - name: Deploy 🚀
-#         uses: peaceiris/actions-gh-pages@v3
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           publish_dir: dist
+      - name: Build 🔧
+        run: |
+          npm install
+          npx ng build --prod
 
       - name: Deploy 🚀
         env:
-          DIR_TO_PUBLISH: build
+          DIR_TO_PUBLISH: dist
           ORG_NAME: codelab-dev
           REPO_NAME: codelab-dev.github.io
           USER_NAME: Alexandr Kolesov
           USER_EMAIL: kolesov.alex.s@gmail.com
         run: |
-          echo "hello, world" > index.html
-        
-          # Clone and clean
+          # Clone
           git clone https://${{ secrets.GH_USER }}:${{ secrets.GH_PAT }}@github.com/${{ env.ORG_NAME }}/${{ env.REPO_NAME }}
-          rm -rf ${{ env.REPO_NAME }}/*
           
-          # Copy
-          cp index.html ${{ env.REPO_NAME }}
+          # Update content
+          rm -rf ${{ env.REPO_NAME }}/*
+          cp ${{ env.DIR_TO_PUBLISH }}/* ${{ env.REPO_NAME }}
 
           # Commit and push
           cd ${{ env.REPO_NAME }}
