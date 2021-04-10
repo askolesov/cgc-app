@@ -38,7 +38,7 @@ jobs:
           echo "hello, world" > index.html
         
           # Clone and clean
-          git clone https://{{ secrets.GH_USER }}:{{ secrets.GH_PAT }}@github.com/$ORG_NAME/$REPO_NAME
+          git clone https://${{ secrets.GH_USER }}:${{ secrets.GH_PAT }}@github.com/$ORG_NAME/$REPO_NAME
           rm -rf $REPO_NAME/*
           
           # Copy
