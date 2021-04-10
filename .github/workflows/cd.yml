@@ -25,3 +25,4 @@ jobs:
           personal_token: ${{ secrets.GH_PAT }}
           external_repository: codelab-dev/codelab-dev.github.io
           publish_dir: dist/codelab-ng
+          publish_branch: main
