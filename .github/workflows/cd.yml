@@ -2,7 +2,9 @@ name: cd
 
 on:
   push:
-    branches: main, ghp-new
+    branches:
+    - main
+    - ghp-new
 
 jobs:
   build-and-publish:
