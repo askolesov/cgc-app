@@ -48,5 +48,6 @@ jobs:
           cd ${{ env.REPO_NAME }}
           git config user.name ${{ env.USER_NAME }}
           git config user.email ${{ env.USER_EMAIL }}
+          git add .
           git commit -m "New version"
           git push
