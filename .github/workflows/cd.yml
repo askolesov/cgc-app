@@ -32,21 +32,21 @@ jobs:
           DIR_TO_PUBLISH: build
           ORG_NAME: codelab-dev
           REPO_NAME: codelab-dev.github.io
-          UESER_NAME: Alexandr Kolesov
+          USER_NAME: Alexandr Kolesov
           USER_EMAIL: kolesov.alex.s@gmail.com
         run: |
           echo "hello, world" > index.html
         
           # Clone and clean
-          git clone https://${{ secrets.GH_USER }}:${{ secrets.GH_PAT }}@github.com/$ORG_NAME/$REPO_NAME
-          rm -rf $REPO_NAME/*
+          git clone https://${{ secrets.GH_USER }}:${{ secrets.GH_PAT }}@github.com/${{ env.ORG_NAME }}/${{ env.REPO_NAME }}
+          rm -rf ${{ env.REPO_NAME }}/*
           
           # Copy
-          cp index.html $REPO_NAME
+          cp index.html ${{ env.REPO_NAME }}
 
           # Commit and push
-          cd $REPO_NAME
-          git config user.name $USER_NAME
-          git config user.email $USER_EMAIL
+          cd ${{ env.REPO_NAME }}
+          git config user.name ${{ env.USER_NAME }}
+          git config user.email ${{ env.USER_EMAIL }}
           git commit -m "New version"
           git push
