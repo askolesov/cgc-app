@@ -2,7 +2,7 @@ name: cd
 
 on:
   push:
-    branches: main
+    branches: main, ghp-new
 
 jobs:
   build-and-publish:
@@ -14,13 +14,17 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Build 🔧
-        run: |
-          npm install
-          npx ng build --prod --base-href=/codelab-ng/codelab-ng/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
+#       - name: Build 🔧
+#         run: |
+#           npm install
+#           npx ng build --prod --base-href=/codelab-ng/codelab-ng/ # Slash at the end is important. It allows not to specify --deploy-url and fixes favicon.
           
+#       - name: Deploy 🚀
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_dir: dist
+
       - name: Deploy 🚀
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist
+        run: |
+          echo "hello world"
