@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Strategy } from 'src/app/shared/models/strategy';
+import { StrategyRun } from 'src/app/shared/models/strategy-run';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +11,30 @@ export class StrategyService {
 
   private baseUrl = 'strategy';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getStrategyHeaders(): Observable<Strategy[]> { // TODO: Use headers
     return this.http.get(this.baseUrl) as Observable<Strategy[]>;
   }
 
-  // getModelInfo(vid: string, pid: string, prevHeight: string): Observable<ModelInfo> {
-  //   const params = prevHeight ? new HttpParams().append('prev_height', prevHeight) : null;
-  //   return this.http.get(`${this.baseUrl}/${vid}/${pid}`, ModelInfo, params);
-  // }
+  getStrategy(id: string): Observable<Strategy> {
+    return this.http.get(`${this.baseUrl}/${id}`) as Observable<Strategy>;
+  }
 
-  // goDeleteModelInfo(vid: string, pid: string) {
-  //   const message = new MessageDeleteModelInfo({vid: parseInt(vid, 10), pid: parseInt(pid, 10)});
-  //   this.txService.goPreview(message, '/model-info');
-  // }
+  createStrategy(strategy: Strategy): Observable<Strategy> {
+    return this.http.post(`${this.baseUrl}`, strategy) as Observable<Strategy>;
+  }
+
+  updateStrategy(strategy: Strategy): Observable<Strategy> {
+    return this.http.put(`${this.baseUrl}/${strategy.id}`, strategy) as Observable<Strategy>;
+  }
+
+  deleteStrategy(id: string) {
+    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+  }
+
+  runStrategy(strategyRun: StrategyRun): Observable<StrategyRun> {
+    // TODO: Move to appropriate controller
+    return this.http.post(`sandbox/strategy-run`, strategyRun) as Observable<StrategyRun>;
+  }
 }

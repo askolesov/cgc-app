@@ -1,5 +1,7 @@
 <h1 class="h2">Strategies</h1>
 
+<button [routerLink]="['new']">New</button>
+
 <ng-container *ngIf="items$ | async as items; else loadingBlock">
     <table>
         <thead>
@@ -9,14 +11,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let strategy of items">
-                <td>{{strategy.id}}</td>
-                <td>{{strategy.name}}</td>
+            <tr *ngFor="let item of items">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td [routerLink]="[item.id]">edit</td>
+                <td (click)="delete(item.id)">delete</td>
             </tr>
         </tbody>
     </table>
 </ng-container>
 
 <ng-template #loadingBlock>
-    <div>Loading strategies...</div>
+    <div>Loading items...</div>
 </ng-template>
