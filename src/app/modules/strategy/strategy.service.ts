@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Strategy } from 'src/app/shared/models/strategy';
 import { StrategyRun } from 'src/app/shared/models/strategy-run';
 
@@ -29,7 +30,8 @@ export class StrategyService {
     return this.http.put(`${this.baseUrl}/${strategy.id}`, strategy) as Observable<Strategy>;
   }
 
-  deleteStrategy(id: string) {
+  // TODO: Do sth with it
+  deleteStrategy(id: string): Observable<string> {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
 

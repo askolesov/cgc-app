@@ -24,23 +24,23 @@ export class StrategyEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map(pm => pm.get('id')),
-      switchMap(id => id == 'new' ? of(new Strategy()) : this.strategyService.getStrategy(id))
+      switchMap(id => id === 'new' ? of(new Strategy()) : this.strategyService.getStrategy(id))
     ).subscribe(this.strategy$.next);
   }
 
-  save(item: Strategy) {
-    if (item.id != undefined) {
+  save(item: Strategy): void {
+    if (item.id !== undefined) {
       this.strategyService.updateStrategy(item).subscribe(this.strategy$.next);
     } else {
       this.strategyService.createStrategy(item).subscribe(s => this.router.navigate(['..', s.id], { relativeTo: this.route }));
     }
   }
 
-  execute(strategy: Strategy, input: string) {
-    let sr = new StrategyRun();
+  execute(strategy: Strategy, input: string): void {
+    const sr = new StrategyRun();
     sr.source = strategy.source;
     sr.inputJson = input;
 
-    this.strategyService.runStrategy(sr).subscribe(sr => this.strategyRun$.next(sr));
+    this.strategyService.runStrategy(sr).subscribe(this.strategyRun$.next);
   }
 }

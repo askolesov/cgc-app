@@ -18,11 +18,11 @@ export class StrategyListComponent implements OnInit {
     this.updateItems();
   }
 
-  updateItems() {
+  updateItems(): void {
     this.strategyService.getStrategyHeaders().subscribe(this.items$.next);
   }
-  
-  delete(id: string) {
+
+  delete(id: string): void {
     this.strategyService.deleteStrategy(id).subscribe(this.updateItems);
   }
 }
