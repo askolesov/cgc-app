@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, Subject } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { of, Subject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { Strategy } from 'src/app/shared/models/strategy';
 import { StrategyRun } from 'src/app/shared/models/strategy-run';
 import { StrategyService } from '../../strategy.service';
@@ -13,8 +13,8 @@ import { StrategyService } from '../../strategy.service';
 })
 export class StrategyEditComponent implements OnInit {
 
-  strategy$: Observable<Strategy>;
-  strategyRun$: Observable<StrategyRun>;
+  strategy$ = new Subject<Strategy>();
+  strategyRun$ = new Subject<StrategyRun>();
 
   constructor(
     private strategyService: StrategyService,
@@ -22,19 +22,15 @@ export class StrategyEditComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.strategy$ = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
       map(pm => pm.get('id')),
-      tap(console.log),
-      switchMap(id => id == 'new' ?
-        of(new Strategy()) :
-        this.strategyService.getStrategy(id))
-    );
+      switchMap(id => id == 'new' ? of(new Strategy()) : this.strategyService.getStrategy(id))
+    ).subscribe(this.strategy$.next);
   }
 
   save(item: Strategy) {
     if (item.id != undefined) {
-      console.log("update")
-      this.strategyService.updateStrategy(item).subscribe();
+      this.strategyService.updateStrategy(item).subscribe(this.strategy$.next);
     } else {
       this.strategyService.createStrategy(item).subscribe(s => this.router.navigate(['..', s.id], { relativeTo: this.route }));
     }
@@ -45,7 +41,6 @@ export class StrategyEditComponent implements OnInit {
     sr.source = strategy.source;
     sr.inputJson = input;
 
-    // TODO: Not correct probably...
-    this.strategyRun$ = this.strategyService.runStrategy(sr);
+    this.strategyService.runStrategy(sr).subscribe(sr => this.strategyRun$.next(sr));
   }
 }

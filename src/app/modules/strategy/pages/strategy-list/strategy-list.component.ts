@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 import { Strategy } from 'src/app/shared/models/strategy';
 import { StrategyService } from '../../strategy.service';
 
@@ -11,18 +10,19 @@ import { StrategyService } from '../../strategy.service';
 })
 export class StrategyListComponent implements OnInit {
 
-  update$ = new BehaviorSubject<void>(null);
-  items$: Observable<Strategy[]>;
+  items$: Subject<Strategy[]>;
 
   constructor(private strategyService: StrategyService) { }
 
   ngOnInit(): void {
-    this.items$ = this.update$.pipe(
-      switchMap(_ => this.strategyService.getStrategyHeaders())
-    );
+    this.updateItems();
   }
 
+  updateItems() {
+    this.strategyService.getStrategyHeaders().subscribe(this.items$.next);
+  }
+  
   delete(id: string) {
-    this.strategyService.deleteStrategy(id).subscribe(_ => this.update$.next());
+    this.strategyService.deleteStrategy(id).subscribe(this.updateItems);
   }
 }
