@@ -25,12 +25,12 @@ export class StrategyEditComponent implements OnInit {
     this.route.paramMap.pipe(
       map(pm => pm.get('id')),
       switchMap(id => id === 'new' ? of(new Strategy()) : this.strategyService.getStrategy(id))
-    ).subscribe(this.strategy$.next);
+    ).subscribe(i => this.strategy$.next(i));
   }
 
   save(item: Strategy): void {
     if (item.id !== undefined) {
-      this.strategyService.updateStrategy(item).subscribe(this.strategy$.next);
+      this.strategyService.updateStrategy(item).subscribe(i => this.strategy$.next(i));
     } else {
       this.strategyService.createStrategy(item).subscribe(s => this.router.navigate(['..', s.id], { relativeTo: this.route }));
     }
@@ -41,6 +41,6 @@ export class StrategyEditComponent implements OnInit {
     sr.source = strategy.source;
     sr.inputJson = input;
 
-    this.strategyService.runStrategy(sr).subscribe(this.strategyRun$.next);
+    this.strategyService.runStrategy(sr).subscribe(i => this.strategyRun$.next(i));
   }
 }

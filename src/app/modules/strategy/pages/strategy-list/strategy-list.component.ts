@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Strategy } from 'src/app/shared/models/strategy';
+import { StrategyHeader } from 'src/app/shared/models/strategy-header';
 import { StrategyService } from '../../strategy.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { StrategyService } from '../../strategy.service';
 })
 export class StrategyListComponent implements OnInit {
 
-  items$: Subject<Strategy[]>;
+  items$ = new Subject<StrategyHeader[]>();
 
   constructor(private strategyService: StrategyService) { }
 
@@ -19,10 +20,10 @@ export class StrategyListComponent implements OnInit {
   }
 
   updateItems(): void {
-    this.strategyService.getStrategyHeaders().subscribe(this.items$.next);
+    this.strategyService.getStrategyHeaders().subscribe(i => this.items$.next(i));
   }
 
   delete(id: string): void {
-    this.strategyService.deleteStrategy(id).subscribe(this.updateItems);
+    this.strategyService.deleteStrategy(id).subscribe(_ => this.updateItems());
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Strategy } from 'src/app/shared/models/strategy';
+import { StrategyHeader } from 'src/app/shared/models/strategy-header';
 import { StrategyRun } from 'src/app/shared/models/strategy-run';
 
 @Injectable({
@@ -14,7 +15,7 @@ export class StrategyService {
 
   constructor(private http: HttpClient) { }
 
-  getStrategyHeaders(): Observable<Strategy[]> { // TODO: Use headers
+  getStrategyHeaders(): Observable<StrategyHeader[]> { // TODO: Use headers
     return this.http.get(this.baseUrl) as Observable<Strategy[]>;
   }
 
@@ -30,13 +31,12 @@ export class StrategyService {
     return this.http.put(`${this.baseUrl}/${strategy.id}`, strategy) as Observable<Strategy>;
   }
 
-  // TODO: Do sth with it
-  deleteStrategy(id: string): Observable<string> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+  deleteStrategy(id: string): Observable<void> {
+    return this.http.delete(`${this.baseUrl}/${id}`).pipe(map(_ => undefined));
   }
 
+  // Todo: use sandbox service to avoid name collisions
   runStrategy(strategyRun: StrategyRun): Observable<StrategyRun> {
-    // TODO: Move to appropriate controller
-    return this.http.post(`sandbox/strategy-run`, strategyRun) as Observable<StrategyRun>;
+    return this.http.post(`${this.baseUrl}/run`, strategyRun) as Observable<StrategyRun>;
   }
 }

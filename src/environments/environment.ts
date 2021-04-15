@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/api'
+  apiUrl: 'https://code-lab-yvxtsmdkza-uc.a.run.app/api'
 };
 
 /*
