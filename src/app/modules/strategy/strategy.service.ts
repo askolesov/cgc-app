@@ -12,6 +12,7 @@ import { StrategyRun } from 'src/app/shared/models/strategy-run';
 export class StrategyService {
 
   private baseUrl = 'strategy';
+  private strategyRunBaseUrl = 'strategy-run';
 
   constructor(private http: HttpClient) { }
 
@@ -35,8 +36,8 @@ export class StrategyService {
     return this.http.delete(`${this.baseUrl}/${id}`).pipe(map(_ => undefined));
   }
 
-  // Todo: use sandbox service to avoid name collisions
+  // Todo: use separate service
   runStrategy(strategyRun: StrategyRun): Observable<StrategyRun> {
-    return this.http.post(`${this.baseUrl}/run`, strategyRun) as Observable<StrategyRun>;
+    return this.http.post(`${this.strategyRunBaseUrl}`, strategyRun) as Observable<StrategyRun>;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of, Subject } from 'rxjs';
+import { BehaviorSubject, of, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Strategy } from 'src/app/shared/models/strategy';
 import { StrategyRun } from 'src/app/shared/models/strategy-run';
@@ -13,8 +13,8 @@ import { StrategyService } from '../../strategy.service';
 })
 export class StrategyEditComponent implements OnInit {
 
-  strategy$ = new Subject<Strategy>();
-  strategyRun$ = new Subject<StrategyRun>();
+  strategy$ = new BehaviorSubject<Strategy>(undefined);
+  strategyRun$ = new BehaviorSubject<StrategyRun>(new StrategyRun());
 
   constructor(
     private strategyService: StrategyService,

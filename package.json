@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deps-check": "npm-check --skip-unused",
-    "deps-update": "npm-check --update"
+    "deps-update": "npm-check --update",
+    "test-all": "npm install && npx ng build && npx ng lint && npm run deps-check"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +34,7 @@
     "@angular/compiler-cli": "^11.2.10",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^14.14.39",
+    "@types/node": "^14.14.41",
     "codelyzer": "^6.0.0",
     "jasmine-core": "^3.7.1",
     "jasmine-spec-reporter": "^7.0.0",

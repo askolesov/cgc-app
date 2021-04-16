@@ -1,3 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-@use '../node_modules/normalize.css/normalize.css'
+@use '../node_modules/normalize.css/normalize.css';
+
+.content {
+    margin: 20px;
+}
+
+.table {
+    th, td {
+        padding: 5px;
+        text-align: left;
+    }
+}
