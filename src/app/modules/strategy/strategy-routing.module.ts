@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: 'strategy', component: StrategyListComponent },
-  { path: 'strategy/new', component: StrategyEditComponent },
   { path: 'strategy/:id', component: StrategyEditComponent },
 ];
 

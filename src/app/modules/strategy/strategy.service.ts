@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Strategy } from 'src/app/shared/models/strategy';
+import { StrategyHeader } from 'src/app/shared/models/strategy-header';
+import { StrategyRun } from 'src/app/shared/models/strategy-run';
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +12,32 @@ import { Strategy } from 'src/app/shared/models/strategy';
 export class StrategyService {
 
   private baseUrl = 'strategy';
+  private strategyRunBaseUrl = 'strategy-run';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getStrategyHeaders(): Observable<Strategy[]> { // TODO: Use headers
+  getStrategyHeaders(): Observable<StrategyHeader[]> { // TODO: Use headers
     return this.http.get(this.baseUrl) as Observable<Strategy[]>;
   }
 
-  // getModelInfo(vid: string, pid: string, prevHeight: string): Observable<ModelInfo> {
-  //   const params = prevHeight ? new HttpParams().append('prev_height', prevHeight) : null;
-  //   return this.http.get(`${this.baseUrl}/${vid}/${pid}`, ModelInfo, params);
-  // }
+  getStrategy(id: string): Observable<Strategy> {
+    return this.http.get(`${this.baseUrl}/${id}`) as Observable<Strategy>;
+  }
 
-  // goDeleteModelInfo(vid: string, pid: string) {
-  //   const message = new MessageDeleteModelInfo({vid: parseInt(vid, 10), pid: parseInt(pid, 10)});
-  //   this.txService.goPreview(message, '/model-info');
-  // }
+  createStrategy(strategy: Strategy): Observable<Strategy> {
+    return this.http.post(`${this.baseUrl}`, strategy) as Observable<Strategy>;
+  }
+
+  updateStrategy(strategy: Strategy): Observable<Strategy> {
+    return this.http.put(`${this.baseUrl}/${strategy.id}`, strategy) as Observable<Strategy>;
+  }
+
+  deleteStrategy(id: string): Observable<void> {
+    return this.http.delete(`${this.baseUrl}/${id}`).pipe(map(_ => undefined));
+  }
+
+  // Todo: use separate service
+  runStrategy(strategyRun: StrategyRun): Observable<StrategyRun> {
+    return this.http.post(`${this.strategyRunBaseUrl}`, strategyRun) as Observable<StrategyRun>;
+  }
 }

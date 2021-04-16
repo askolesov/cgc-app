@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Strategy } from 'src/app/shared/models/strategy';
+import { StrategyHeader } from 'src/app/shared/models/strategy-header';
 import { StrategyService } from '../../strategy.service';
-import { pluck, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-strategy-list',
@@ -11,15 +11,19 @@ import { pluck, share } from 'rxjs/operators';
 })
 export class StrategyListComponent implements OnInit {
 
-  items$: Observable<Strategy[]>;
+  items$ = new Subject<StrategyHeader[]>();
 
   constructor(private strategyService: StrategyService) { }
 
   ngOnInit(): void {
-    this.getStrategyHeaders();
+    this.updateItems();
   }
 
-  getStrategyHeaders(): void {
-    this.items$ = this.strategyService.getStrategyHeaders().pipe();
+  updateItems(): void {
+    this.strategyService.getStrategyHeaders().subscribe(i => this.items$.next(i));
+  }
+
+  delete(id: string): void {
+    this.strategyService.deleteStrategy(id).subscribe(_ => this.updateItems());
   }
 }

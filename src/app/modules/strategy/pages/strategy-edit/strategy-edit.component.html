@@ -1,1 +1,42 @@
-<p>strategy-edit works!</p>
+<div class="content">
+    <ng-container *ngIf="strategy$ | async as strategy; else loadingBlock">
+        <label for="name">Name</label>
+        <br>
+        <input type="text" [(ngModel)]="strategy.name">
+        <br>
+        <br>
+
+        <label for="source">Source</label>
+        <br>
+        <textarea rows="3" type="text" [(ngModel)]="strategy.source"></textarea>
+        <br>
+        <br>
+
+        <button (click)="save(strategy)">Save</button>
+        <br>
+        <br>
+
+        <label for="input">Input</label>
+        <br>
+        <textarea rows="3" type="text" [(ngModel)]="input"></textarea>
+        <br>
+        <br>
+
+        <button (click)="execute(strategy, input)">Execute</button>
+        <br>
+        <br>
+
+        <ng-container *ngIf="strategyRun$ | async as strategyRun; else runLoadingBlock;">
+            <div *ngIf="strategyRun.outputJson">Result: {{strategyRun.outputJson}}</div>
+            <div *ngIf="strategyRun.error">Error: {{strategyRun.error}}</div>
+        </ng-container>
+
+        <ng-template #runLoadingBlock>
+            <div>Loading strategy run...</div>
+        </ng-template>
+    </ng-container>
+
+    <ng-template #loadingBlock>
+        <div>Loading strategy...</div>
+    </ng-template>
+</div>
