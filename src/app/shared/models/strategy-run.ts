@@ -1,5 +1,7 @@
+import { Strategy } from './strategy';
+
 export class StrategyRun {
-    public source?: string;
+    public strategy?: Strategy;
 
     public inputJson?: string;
 

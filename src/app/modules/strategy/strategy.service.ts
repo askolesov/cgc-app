@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Strategy } from 'src/app/shared/models/strategy';
 import { StrategyHeader } from 'src/app/shared/models/strategy-header';
-import { StrategyRun } from 'src/app/shared/models/strategy-run';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,6 @@ import { StrategyRun } from 'src/app/shared/models/strategy-run';
 export class StrategyService {
 
   private baseUrl = 'strategy';
-  private strategyRunBaseUrl = 'strategy-run';
 
   constructor(private http: HttpClient) { }
 
@@ -34,10 +32,5 @@ export class StrategyService {
 
   deleteStrategy(id: string): Observable<void> {
     return this.http.delete(`${this.baseUrl}/${id}`).pipe(map(_ => undefined));
-  }
-
-  // Todo: use separate service
-  runStrategy(strategyRun: StrategyRun): Observable<StrategyRun> {
-    return this.http.post(`${this.strategyRunBaseUrl}`, strategyRun) as Observable<StrategyRun>;
   }
 }

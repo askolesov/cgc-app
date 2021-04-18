@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './modules/home/home.module';
-import { PlaygroundModule } from './modules/playground/playground.module';
 import { StrategyModule } from './modules/strategy/strategy.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BaseUrlInterceptor } from './core/interceptors/base-url.interceptor';
+import { GameModule } from './modules/game/game.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { BaseUrlInterceptor } from './core/interceptors/base-url.interceptor';
     SharedModule,
     HomeModule,
     StrategyModule,
-    PlaygroundModule,
+    GameModule,
     AppRoutingModule
   ],
   providers: [

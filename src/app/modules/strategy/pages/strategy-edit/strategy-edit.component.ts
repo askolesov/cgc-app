@@ -4,6 +4,7 @@ import { BehaviorSubject, of, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Strategy } from 'src/app/shared/models/strategy';
 import { StrategyRun } from 'src/app/shared/models/strategy-run';
+import { StrategyRunService } from '../../strategy-run.service';
 import { StrategyService } from '../../strategy.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class StrategyEditComponent implements OnInit {
 
   constructor(
     private strategyService: StrategyService,
+    private strategyRunService: StrategyRunService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -38,9 +40,9 @@ export class StrategyEditComponent implements OnInit {
 
   execute(strategy: Strategy, input: string): void {
     const sr = new StrategyRun();
-    sr.source = strategy.source;
+    sr.strategy = strategy;
     sr.inputJson = input;
 
-    this.strategyService.runStrategy(sr).subscribe(i => this.strategyRun$.next(i));
+    this.strategyRunService.runStrategy(sr).subscribe(i => this.strategyRun$.next(i));
   }
 }
